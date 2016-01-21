@@ -2,7 +2,8 @@ goog.module('googmodule.TheModule');
 
 var Required = goog.require('googmodule.Required');
 var RequiredDefault = goog.require('googmodule.requiredModuleDefault');
-var requiredModule = goog.require('googmodule.requiredModule');
+var base = goog.require('googmodule.base');
+var requiredModule = goog.require('googmodule.base.requiredModule');
 
 /** @type {number} */
 exports.a = 1;

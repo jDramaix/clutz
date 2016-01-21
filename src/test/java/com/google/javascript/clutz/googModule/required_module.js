@@ -1,4 +1,4 @@
-goog.module('googmodule.requiredModule');
+goog.module('googmodule.base.requiredModule');
 
 /** @type {number} */
 exports.rm = 12;
