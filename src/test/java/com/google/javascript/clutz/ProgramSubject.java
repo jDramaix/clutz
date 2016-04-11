@@ -104,7 +104,7 @@ class ProgramSubject extends Subject<ProgramSubject, ProgramSubject.Program> {
       roots.add("main.js");
     }
 
-    List<SourceFile> externFiles = new ArrayList<>();
+    List<SourceFile> externFiles;
     if (withPlatform) {
       externFiles = DeclarationGenerator.getDefaultExterns(opts);
     } else {

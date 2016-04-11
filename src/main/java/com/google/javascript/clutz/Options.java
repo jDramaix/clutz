@@ -43,6 +43,10 @@ public class Options {
       usage = "emits platform externs, instead of omitting them in favor of TS lib.d.ts")
   boolean emitPlatformExterns;
 
+  @Option(name = "--emitPlatformExterns",
+      usage = "emits platform externs, instead of omitting them in favor of TS lib.d.ts")
+  boolean emitPlatformExterns;
+
   @Argument
   List<String> arguments = new ArrayList<>();
 

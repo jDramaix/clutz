@@ -8,6 +8,7 @@ import static com.google.javascript.rhino.jstype.JSTypeNative.OBJECT_TYPE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Splitter;
@@ -1114,15 +1115,25 @@ public class DeclarationGenerator {
 
     private void visitTemplateTypes(ObjectType type) {
       if (type.hasAnyTemplateTypes() && !type.getTemplateTypeMap().isEmpty()) {
-        emit("<");
-        Iterator<TemplateType> it = type.getTemplateTypeMap().getTemplateKeys().iterator();
-        while (it.hasNext()) {
-          emit(it.next().getDisplayName());
-          if (it.hasNext()) {
-            emit(",");
+        // Closure compiler add a fake template types like IObject#KEY or IObject#Value
+        // for several types. The following code is a workaround waiting this bug is fixed in the
+        // closure compiler
+        // TODO(dramaix): remove this code when the bug is fixed in JsCompiler.
+        List<String> realTemplateType = new ArrayList<>();
+
+        for (TemplateType templateType: type.getTemplateTypeMap().getTemplateKeys()) {
+          String displayName = templateType.getDisplayName();
+
+          if (displayName.indexOf('#') < 0) {
+            realTemplateType.add(displayName);
           }
         }
-        emit(">");
+
+        if (!realTemplateType.isEmpty()) {
+          emit("<");
+          emit(Joiner.on(" , ").join(realTemplateType));
+          emit(">");
+        }
       }
     }
 
