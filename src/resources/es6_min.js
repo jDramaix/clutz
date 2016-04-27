@@ -1,5 +1,5 @@
 /**
- * @fileoverview Minimum type definition required by the closure compiler.
+ * @fileoverview Minimun type definition reauired by the closure compiler.
  * @externs
  */
 
