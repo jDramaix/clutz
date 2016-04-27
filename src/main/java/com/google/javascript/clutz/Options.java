@@ -39,10 +39,6 @@ public class Options {
       handler = StringArrayOptionHandler.class)
   List<String> depgraphFiles = new ArrayList<>();
 
-  @Option(name = "--skipParseExterns",
-      usage = "run faster by skipping the externs parsing (useful for tests)")
-  boolean skipParseExterns;
-
   @Option(name = "--emitPlatformExterns",
       usage = "emits platform externs, instead of omitting them in favor of TS lib.d.ts")
   boolean emitPlatformExterns;
@@ -81,9 +77,7 @@ public class Options {
     }
   }
 
-  Options(boolean skipParseExterns) {
-    this.skipParseExterns = skipParseExterns;
-  }
+  Options() {}
 
   public List<String> readDepgraphs() {
     List<String> result = new ArrayList<>();

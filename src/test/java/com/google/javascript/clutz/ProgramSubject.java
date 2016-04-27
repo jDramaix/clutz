@@ -77,7 +77,7 @@ class ProgramSubject extends Subject<ProgramSubject, ProgramSubject.Program> {
   }
 
   private String[] parse() throws AssertionError {
-    Options opts = new Options(false);
+    Options opts = new Options();
     opts.debug = true;
     opts.emitPlatformExterns = emitPlatformExterns;
     List<SourceFile> sourceFiles = new ArrayList<>();
@@ -108,6 +108,9 @@ class ProgramSubject extends Subject<ProgramSubject, ProgramSubject.Program> {
     if (withPlatform) {
       externFiles = DeclarationGenerator.getDefaultExterns(opts);
     } else {
+      // Clutz is very permissive in its inputs, thus supporting ES6 code. Closure refuses
+      // to compile ES6 unless es6.js extern is passed in. To speed up test exectution we
+      // pass a thin shim instead of the real es6.js extern.
       externFiles = Lists.newArrayList(SourceFile.fromFile("src/resources/es6_min.js", UTF_8));
     }
 
